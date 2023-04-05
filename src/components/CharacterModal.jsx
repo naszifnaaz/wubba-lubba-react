@@ -11,7 +11,6 @@ import {
   Image,
   Heading,
   Badge,
-  Flex,
   Box,
 } from "@chakra-ui/react";
 
@@ -19,7 +18,7 @@ export function CharacterModal({ character, statusColor }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Button onClick={onOpen} m={"10px"}>
+      <Button colorScheme="twitter" onClick={onOpen} m={"10px"}>
         View More
       </Button>
 
@@ -31,17 +30,12 @@ export function CharacterModal({ character, statusColor }) {
           <ModalBody margin={"auto"}>
             <Image src={character.image} />
             <Box m={"1rem"}>
-              <Flex mb={"10px"}>
+              <Box mb={"10px"}>
                 <Heading>{character.name}</Heading>
-                <Badge
-                  ml="1"
-                  colorScheme={statusColor}
-                  fontSize={"1rem"}
-                  m={"10px"}
-                >
+                <Badge ml="1" colorScheme={statusColor} fontSize={"1rem"}>
                   {character.status}
                 </Badge>
-              </Flex>
+              </Box>
               <Heading size={"sm"}>Species : {character.species}</Heading>
               <Heading size={"sm"}>Gender : {character.gender}</Heading>
               <Heading size={"sm"}>
