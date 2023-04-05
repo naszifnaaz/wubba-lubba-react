@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { SimpleGrid } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { CharacterCard } from "./components/CharacterCard";
+import { Spinner } from "@chakra-ui/react";
+import { Branding } from "./components/Branding";
 
 function App() {
+  const [characters, setCharacters] = useState([]);
+
+  useEffect(() => {
+    fetch("https://rickandmortyapi.com/api/character")
+      .then((res) => res.json())
+      .then((data) => setCharacters(data.results));
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Branding />
+      {characters.length === 0 ? (
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+          marginTop={"50px"}
+        />
+      ) : (
+        <SimpleGrid columns={[1, 2, 3, 4]}>
+          {characters.map((character, index) => {
+            return <CharacterCard character={character} key={index} />;
+          })}
+        </SimpleGrid>
+      )}
     </div>
   );
 }
