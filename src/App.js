@@ -2,7 +2,7 @@ import "./App.css";
 import { SimpleGrid } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { CharacterCard } from "./components/CharacterCard";
-import { Spinner, useToast } from "@chakra-ui/react";
+import { Spinner, useToast, useColorMode } from "@chakra-ui/react";
 import { Branding } from "./components/Branding";
 import { Pagination } from "./components/Pagination";
 import { Filter } from "./components/Filter";
@@ -18,6 +18,7 @@ function App() {
   const [filterStatus, setFilterStatus] = useState("");
 
   const toast = useToast();
+
   function incPage() {
     if (page === totalPages) return;
     setPage(page + 1);
